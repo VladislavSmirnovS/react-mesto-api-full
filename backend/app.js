@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const routes = require('./routes');
 const errorHandler = require('./middleware/error-handler');
-const { requestLogger, errorLogger } = require('./middlewares/logger'); 
+const { requestLogger, errorLogger } = require('./middleware/logger');
 const { PORT, DB_ADDRESS } = require('./config');
 
 const app = express();
@@ -15,7 +15,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(requestLogger)
+app.use(requestLogger);
 
 mongoose.connect(DB_ADDRESS, {
   useNewUrlParser: true,
