@@ -74,9 +74,9 @@ class Api {
 }
 
 const api = new Api({
-  url: "https://api.mesto.vladislav.nomoredomains.work/",
+  url: "http://localhost:3001/",
   headers: {
-    Authorization: "0ac03c29-348f-4641-b1c9-55603c5e7c4f",
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
     "content-type": "application/json",
   },
 });

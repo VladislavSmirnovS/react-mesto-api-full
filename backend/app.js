@@ -18,7 +18,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(requestLogger);
-app.use(cors(corsOption));
+app.use(corsOption);
+
 mongoose.connect(DB_ADDRESS, {
   useNewUrlParser: true,
 });

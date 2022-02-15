@@ -1,9 +1,10 @@
 const allowedCors = ['http://localhost:3000',
+  'http://localhost:3001',
   'https://mesto.vladislav.nomoredomains.xyz/',
   'http://mesto.vladislav.nomoredomains.xyz/',
 ];
 
-module.exports = function corsOption(req, res, next) {
+const corsOption = (req, res, next) => {
   const { origin } = req.headers;
   if (allowedCors.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
@@ -18,3 +19,5 @@ module.exports = function corsOption(req, res, next) {
   }
   return next();
 };
+
+module.exports = corsOption;
