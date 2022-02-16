@@ -52,7 +52,7 @@ function App() {
 
   function onLogin(email, password) {
     auth.loginUser(email, password).then((res) => {
-      localStorage.setItem("jwt", res.token);
+      if(res.token)
       setIsLoggedIn(true);
       setEmailName(email);
       navigate("/");

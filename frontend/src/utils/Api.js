@@ -5,19 +5,19 @@ class Api {
   }
 
   getUserInfo() {
-    return fetch(`${this._url}users/me`, {
+    return fetch(`${this._url}/users/me`, {
       headers: this._headers,
     }).then(this._getResponseData);
   }
 
   getCards() {
-    return fetch(`${this._url}cards`, {
+    return fetch(`${this._url}/cards`, {
       headers: this._headers,
     }).then(this._getResponseData);
   }
 
   setUserInfo(data) {
-    return fetch(`${this._url}users/me`, {
+    return fetch(`${this._url}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
@@ -28,7 +28,7 @@ class Api {
   }
 
   createCard(newCard) {
-    return fetch(`${this._url}cards`, {
+    return fetch(`${this._url}/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
@@ -39,14 +39,14 @@ class Api {
   }
 
   deleteCard(id) {
-    return fetch(`${this._url}cards/${id}`, {
+    return fetch(`${this._url}/cards/${id}`, {
       method: "DELETE",
       headers: this._headers,
     }).then(this._getResponseData);
   }
 
   changeLikeCardStatus(cardId, isNotLiked) {
-    return fetch(`${this._url}cards/likes/${cardId}`, {
+    return fetch(`${this._url}/cards/likes/${cardId}`, {
       method: isNotLiked ? "PUT" : "DELETE",
       headers: this._headers,
     }).then((res) => {
@@ -58,7 +58,7 @@ class Api {
   }
 
   setAvatar(link) {
-    return fetch(`${this._url}users/me/avatar`, {
+    return fetch(`${this._url}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({ avatar: link }),
@@ -74,10 +74,10 @@ class Api {
 }
 
 const api = new Api({
-  url: "http://localhost:3001/",
+  url: "http://localhost:3000",
   headers: {
-    Authorization: `Bearer ${localStorage.getItem('token')}`,
     "content-type": "application/json",
+    "Authorization": `${localStorage.getItem('jwt')}`,
   },
 });
 

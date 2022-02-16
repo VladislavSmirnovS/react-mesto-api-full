@@ -5,14 +5,14 @@ function checkResponse(res) {
   return Promise.reject(res.status);
 }
 
-export const BASE_URL = "http://localhost:3001";
+export const BASE_URL = "http://localhost:3000";
 
 export function registerUser(email, password) {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
+      'Accept': 'application/json',
       "Content-Type": "application/json",
-      'Authorization': `Bearer ${localStorage.getItem('token')}`,
     },
     body: JSON.stringify({ email, password }),
   }).then(checkResponse);
@@ -22,10 +22,18 @@ export function loginUser(email, password) {
   return fetch(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {
+      'Accept': 'application/json',
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
-  }).then(checkResponse);
+  }).then(checkResponse)
+  .then((data) => {
+    if (data.token){
+      console.log(data.token)
+      localStorage.setItem('jwt', data.token);
+      return data;
+    }
+  })
 }
 
 export function getToken(jwt) {
@@ -34,7 +42,7 @@ export function getToken(jwt) {
     headers: {
       'Accept': 'application/json',
       "Content-Type": "application/json",
-      Authorization: `Bearer ${jwt}`,
+      'Authorization': `${jwt}`,
     },
-  }).then(checkResponse).then(data => data)
+  }).then(checkResponse)
 }
