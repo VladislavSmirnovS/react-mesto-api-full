@@ -2,6 +2,8 @@ const allowedCors = [
   'http://localhost:3000',
   'http://localhost:3001',
   'https://mesto.vladislav.nomoredomains.xyz/',
+  'http://mesto.vladislav.nomoredomains.xyz',
+  'https://mesto.vladislav.nomoredomains.xyz',
   'http://mesto.vladislav.nomoredomains.xyz/',
   'http://localhost:3001',
 ];
