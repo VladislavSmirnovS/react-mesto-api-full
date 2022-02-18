@@ -6,6 +6,7 @@ class Api {
 
   getUserInfo() {
     return fetch(`${this._url}/users/me`, {
+      credentials: "include",
       headers: this._headers,
     }).then(this._getResponseData);
   }
@@ -13,12 +14,14 @@ class Api {
   getCards() {
     return fetch(`${this._url}/cards`, {
       headers: this._headers,
+      credentials: "include",
     }).then(this._getResponseData);
   }
 
   setUserInfo(data) {
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
+      credentials: "include",
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
@@ -30,6 +33,7 @@ class Api {
   createCard(newCard) {
     return fetch(`${this._url}/cards`, {
       method: "POST",
+      credentials: "include",
       headers: this._headers,
       body: JSON.stringify({
         name: newCard.name,
@@ -41,14 +45,16 @@ class Api {
   deleteCard(id) {
     return fetch(`${this._url}/cards/${id}`, {
       method: "DELETE",
+      credentials: "include",
       headers: this._headers,
     }).then(this._getResponseData);
   }
 
   changeLikeCardStatus(cardId, isNotLiked) {
-    return fetch(`${this._url}/cards/likes/${cardId}`, {
+    return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: isNotLiked ? "PUT" : "DELETE",
       headers: this._headers,
+      credentials: "include",
     }).then((res) => {
       if (res.ok) {
         return res.json();
@@ -60,6 +66,7 @@ class Api {
   setAvatar(link) {
     return fetch(`${this._url}/users/me/avatar`, {
       method: "PATCH",
+      credentials: "include",
       headers: this._headers,
       body: JSON.stringify({ avatar: link }),
     }).then(this._getResponseData);
@@ -74,10 +81,9 @@ class Api {
 }
 
 const api = new Api({
-  url: "http://localhost:3000",
+  url: "https://api.mesto.vladislav.nomoredomains.work",
   headers: {
     "content-type": "application/json",
-    "Authorization": `${localStorage.getItem('jwt')}`,
   },
 });
 

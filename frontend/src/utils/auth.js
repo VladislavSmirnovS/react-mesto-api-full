@@ -5,13 +5,14 @@ function checkResponse(res) {
   return Promise.reject(res.status);
 }
 
-export const BASE_URL = "http://localhost:3000";
+export const BASE_URL = "https://api.mesto.vladislav.nomoredomains.work";
 
 export function registerUser(email, password) {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
+    credentials: "include",
     headers: {
-      'Accept': 'application/json',
+      Accept: "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
@@ -21,28 +22,22 @@ export function registerUser(email, password) {
 export function loginUser(email, password) {
   return fetch(`${BASE_URL}/signin`, {
     method: "POST",
+    credentials: "include",
     headers: {
-      'Accept': 'application/json',
+      Accept: "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
-  }).then(checkResponse)
-  .then((data) => {
-    if (data.token){
-      console.log(data.token)
-      localStorage.setItem('jwt', data.token);
-      return data;
-    }
-  })
+  }).then(checkResponse);
 }
 
-export function getToken(jwt) {
+export function getToken() {
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
+    credentials: "include",
     headers: {
-      'Accept': 'application/json',
+      Accept: "application/json",
       "Content-Type": "application/json",
-      'Authorization': `${jwt}`,
     },
-  }).then(checkResponse)
+  }).then(checkResponse);
 }

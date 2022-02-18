@@ -8,9 +8,9 @@ const { errors } = require('celebrate');
 const routes = require('./routes');
 const errorHandler = require('./middleware/error-handler');
 const { requestLogger, errorLogger } = require('./middleware/logger');
-const { PORT, DB_ADDRESS } = require('./config');
 const corsOption = require('./middleware/cors');
 
+const { PORT = 3000 } = process.env;
 const app = express();
 
 app.use(bodyParser.json());
@@ -19,7 +19,7 @@ app.use(cookieParser());
 app.use(requestLogger);
 app.use(corsOption);
 
-mongoose.connect(DB_ADDRESS, {
+mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
 });
 
